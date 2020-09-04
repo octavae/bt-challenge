@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobsScheduler", "JobsScheduler\JobsScheduler.csproj", "{125D8FAF-F461-4A01-85F9-3344B611390C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobsWebAPI", "JobsWebAPI\JobsWebAPI.csproj", "{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{125D8FAF-F461-4A01-85F9-3344B611390C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{125D8FAF-F461-4A01-85F9-3344B611390C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{125D8FAF-F461-4A01-85F9-3344B611390C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{125D8FAF-F461-4A01-85F9-3344B611390C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {762768C5-0A82-4B1F-84C9-ACD0F27B6D42}
+	EndGlobalSection
+EndGlobal

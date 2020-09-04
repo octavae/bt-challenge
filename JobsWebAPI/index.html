@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <h2>All jobs</h2>
+        <ul id="jobs" />
+    </div>
+    <div>
+        <h2>Post an action</h2>
+        <input type="text" id="action" size="5" />
+        <input type="button" value="Post" onclick="find();" />
+        <p id="result" />
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+    var uri = 'api/jobs';
+
+    $(document).ready(function () {
+      // Send an AJAX request
+      $.getJSON(uri + '/demo' )
+          .done(function (data) {
+            // On success, 'data' contains a list of products.
+            $.each(data, function (key, item) {
+              // Add a list item for the product.
+              $('<li>', { text: formatItem(item) }).appendTo($('#jobs'));
+            });
+          });
+    });
+
+    function formatItem(item) {
+      return item.JobName;
+    }
+
+    function find() {
+      var id = $('#action').val();
+        /*$.post(uri + '/' + id, { JobId: 84, JobName: "pisica", JobStatus: "OK" }, { contentType: "application/json; charset=utf-8" })
+          .done(function (data) {
+            $('#job').text(formatItem(data));
+          })
+          .fail(function (jqXHR, textStatus, err) {
+            $('#job').text('Error: ' + err);
+          });*/
+        $.ajax({
+            url: uri + '/' + id,
+            type: "POST",
+            data: JSON.stringify({ JobId: 84, JobName: "pisica", JobType: "fisier"}),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#result').text(formatItem(data));
+            },
+            fail: function (jqXHR, textStatus, err) {
+                $('#result').text('Error: ' + err);
+            }
+        });
+    }
+    </script>
+</body>
+</html>

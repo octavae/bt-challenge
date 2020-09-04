@@ -1,0 +1,11 @@
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\bin\Debug\JobsScheduler.exe.config
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\bin\Debug\JobsScheduler.exe
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\bin\Debug\JobsScheduler.pdb
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\obj\Debug\JobsScheduler.csprojAssemblyReference.cache
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\obj\Debug\JobsScheduler.csproj.CoreCompileInputs.cache
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\obj\Debug\JobsScheduler.csproj.CopyComplete
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\obj\Debug\JobsScheduler.exe
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\obj\Debug\JobsScheduler.pdb
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Tavi\source\repos\JobsScheduler\JobsScheduler\bin\Debug\Newtonsoft.Json.xml
