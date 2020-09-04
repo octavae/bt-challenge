@@ -33,18 +33,25 @@ namespace JobsWebAPI.Controllers
             var jobId = value.JobId.Value;
             var jobName = value.JobName.Value;
             var jobType = value.JobType.Value;
+            var jobStatus = "NOK";
 
-            /*string path = @"c:\temp\file_" + jobId + ".txt";
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
             if (!File.Exists(path))
             {
                 // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(path))
+                try
                 {
+                    StreamWriter sw = File.CreateText(path);
                     sw.WriteLine(jobName);
+                    jobStatus = "OK";
                 }
-            }*/
+                catch (Exception ex)
+                {
+                    // log exeption
+                }
+            }
 
-            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = "OK" };
+            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
         }
 
         [HttpPost]
@@ -55,8 +62,25 @@ namespace JobsWebAPI.Controllers
             var jobId = value.JobId.Value;
             var jobName = value.JobName.Value;
             var jobType = value.JobType.Value;
+            var jobStatus = "NOK";
 
-            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = "OK" };
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                try
+                {
+                    StreamWriter sw = File.CreateText(path);
+                    sw.WriteLine(jobName);
+                    jobStatus = "OK";
+                }
+                catch (Exception ex)
+                {
+                    // log exeption
+                }
+            }
+
+            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
         }
 
         [HttpPost]
@@ -67,8 +91,25 @@ namespace JobsWebAPI.Controllers
             var jobId = value.JobId.Value;
             var jobName = value.JobName.Value;
             var jobType = value.JobType.Value;
+            var jobStatus = "NOK";
 
-            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = "OK" };
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                try
+                {
+                    StreamWriter sw = File.CreateText(path);
+                    sw.WriteLine(jobName);
+                    jobStatus = "OK";
+                }
+                catch (Exception ex)
+                {
+                    // log exeption
+                }
+            }
+
+            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
         }
 
         [HttpPost]
@@ -79,8 +120,25 @@ namespace JobsWebAPI.Controllers
             var jobId = value.JobId.Value;
             var jobName = value.JobName.Value;
             var jobType = value.JobType.Value;
+            var jobStatus = "NOK";
 
-            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = "OK" };
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                try
+                {
+                    StreamWriter sw = File.CreateText(path);
+                    sw.WriteLine(jobName);
+                    jobStatus = "OK";
+                }
+                catch (Exception ex)
+                {
+                    // log exeption
+                }
+            }
+
+            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
         }
 
     }
