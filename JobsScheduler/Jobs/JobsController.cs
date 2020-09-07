@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.IO;
 using System.Net.Http;
+using System.Windows;
 
 namespace JobsScheduler.Jobs
 {
@@ -97,7 +98,7 @@ namespace JobsScheduler.Jobs
                 string uri = ConfigurationManager.AppSettings["webapi_uri"] + "/" + job.JobType;
 
                 // serialize job object
-                dynamic json = JsonConvert.SerializeObject(job);
+                string json = JsonConvert.SerializeObject(job);
 
                 // initialize webrequest object (sync) and set the content type to application/json
                 WebRequest request = WebRequest.Create(uri);
@@ -170,13 +171,22 @@ namespace JobsScheduler.Jobs
                 string uri = ConfigurationManager.AppSettings["webapi_uri"] + "/" + job.JobType;
 
                 // serialize job object
-                dynamic json = JsonConvert.SerializeObject(job);
+                string json = JsonConvert.SerializeObject(job);
+                
                 // create a payload to be sent via POST to the web service
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
 
+                MultipartFormDataContent multipartContent = null;
+                if (job.JobType == "fisier") {
+                    multipartContent = new MultipartFormDataContent();
+                    multipartContent.Add(new StringContent(job.JobId.ToString(), Encoding.UTF8),"id");
+                    var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"\" + job.JobName, FileMode.Open);
+                    multipartContent.Add(new StreamContent(stream), "fisier", job.JobName);
+                }
+
                 // sends data to the web service via a post aync request
                 var http = new HttpClient();
-                var response = await http.PostAsync(uri, data);
+                var response = (job.JobType == "fisier" && multipartContent != null) ? await http.PostAsync(uri, multipartContent) : await http.PostAsync(uri, data);
 
                 // get the response from the web api
                 var result = response.Content.ReadAsStringAsync().Result;
@@ -218,8 +228,15 @@ namespace JobsScheduler.Jobs
                     Console.WriteLine(result);
                 }
             }
+            catch (HttpRequestException ex)
+            {
+                // logs the error somewhere
+                Console.WriteLine(ex.Message);
+            }
             catch (Exception ex)
             {
+                // logs the error somewhere
+                Console.WriteLine(ex.Message);
             }
             finally
             {

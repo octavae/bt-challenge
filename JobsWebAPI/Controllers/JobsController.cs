@@ -7,6 +7,8 @@ using System.Web.Http;
 using JobsWebAPI.Models;
 using Newtonsoft.Json;
 using System.IO;
+using System.Web;
+using System.Web.Http.ExceptionHandling;
 
 namespace JobsWebAPI.Controllers
 {
@@ -36,19 +38,18 @@ namespace JobsWebAPI.Controllers
             var jobStatus = "NOK";
 
             string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
-            if (!File.Exists(path))
+            
+            // Creates a file to write to.
+            try
             {
-                // Create a file to write to.
-                try
-                {
-                    StreamWriter sw = File.CreateText(path);
-                    sw.WriteLine(jobName);
-                    jobStatus = "OK";
-                }
-                catch (Exception ex)
-                {
-                    // log exeption
-                }
+                StreamWriter sw = File.CreateText(path);
+                sw.WriteLine(jobName);
+                sw.Close();
+                jobStatus = "OK";
+            }
+            catch (Exception ex)
+            {
+                // log exeption
             }
 
             return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
@@ -56,31 +57,38 @@ namespace JobsWebAPI.Controllers
 
         [HttpPost]
         [ActionName("fisier")]
-        public Job ProceseazaFisier([FromBody] dynamic value)
+        public Job ProceseazaFisier()
         {
             // get the id and the name of the job an create a local file
-            var jobId = value.JobId.Value;
-            var jobName = value.JobName.Value;
-            var jobType = value.JobType.Value;
+            var jobId = HttpContext.Current.Request.Form["id"];
+            var jobName = "";
             var jobStatus = "NOK";
 
-            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
-            if (!File.Exists(path))
-            {
-                // Create a file to write to.
-                try
+            try {
+                
+                var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
+
+                if (file != null && file.ContentLength > 0)
                 {
-                    StreamWriter sw = File.CreateText(path);
-                    sw.WriteLine(jobName);
+                    var fileName = Path.GetFileName(file.FileName);
+
+                    var path = Path.Combine(
+                        HttpContext.Current.Server.MapPath("~/files"),
+                        fileName
+                    );
+
+                    file.SaveAs(path);
+
+                    jobName = fileName;
                     jobStatus = "OK";
                 }
-                catch (Exception ex)
-                {
-                    // log exeption
-                }
+
+            }
+            catch (Exception ex) { 
+            
             }
 
-            return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
+            return new Job { JobId = long.Parse(jobId), JobName = jobName, JobType = "fisier", JobStatus = jobStatus };
         }
 
         [HttpPost]
@@ -94,19 +102,18 @@ namespace JobsWebAPI.Controllers
             var jobStatus = "NOK";
 
             string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
-            if (!File.Exists(path))
+
+            // Creates a file to write to.
+            try
             {
-                // Create a file to write to.
-                try
-                {
-                    StreamWriter sw = File.CreateText(path);
-                    sw.WriteLine(jobName);
-                    jobStatus = "OK";
-                }
-                catch (Exception ex)
-                {
-                    // log exeption
-                }
+                StreamWriter sw = File.CreateText(path);
+                sw.WriteLine(jobName);
+                sw.Close();
+                jobStatus = "OK";
+            }
+            catch (Exception ex)
+            {
+                // log exeption
             }
 
             return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
@@ -123,19 +130,18 @@ namespace JobsWebAPI.Controllers
             var jobStatus = "NOK";
 
             string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files") + @"\file_" + jobId + ".txt";
-            if (!File.Exists(path))
+
+            // Create a file to write to.
+            try
             {
-                // Create a file to write to.
-                try
-                {
-                    StreamWriter sw = File.CreateText(path);
-                    sw.WriteLine(jobName);
-                    jobStatus = "OK";
-                }
-                catch (Exception ex)
-                {
-                    // log exeption
-                }
+                StreamWriter sw = File.CreateText(path);
+                sw.WriteLine(jobName);
+                sw.Close();
+                jobStatus = "OK";
+            }
+            catch (Exception ex)
+            {
+                // log exeption
             }
 
             return new Job { JobId = jobId, JobName = jobName, JobType = jobType, JobStatus = jobStatus };
