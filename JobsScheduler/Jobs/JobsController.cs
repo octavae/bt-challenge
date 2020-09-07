@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Net;
 using System.IO;
+using System.Net.Http;
 
 namespace JobsScheduler.Jobs
 {
@@ -26,7 +27,8 @@ namespace JobsScheduler.Jobs
                 if (jobsCollection != null)
                 {
                     foreach (Job job in jobsCollection) {
-                        ProcessJob(job, connectionString);
+                        //ProcessJob(job, connectionString); // sync method
+                        ProcessJobAsync(job, connectionString); // async method
                     }
                 }
             }
@@ -152,6 +154,72 @@ namespace JobsScheduler.Jobs
                 }
             }
             catch (Exception ex) { 
+            }
+            finally
+            {
+            }
+
+        }
+
+        private async static Task ProcessJobAsync(Job job, string connectionString)
+        {
+
+            try
+            {
+                // the address of the web api
+                string uri = ConfigurationManager.AppSettings["webapi_uri"] + "/" + job.JobType;
+
+                // serialize job object
+                dynamic json = JsonConvert.SerializeObject(job);
+                // create a payload to be sent via POST to the web service
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // sends data to the web service via a post aync request
+                var http = new HttpClient();
+                var response = await http.PostAsync(uri, data);
+
+                // get the response from the web api
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                // if result is not empty
+                if (result != "")
+                {
+                    // deserialize the json string to a Job object
+                    Job djob = JsonConvert.DeserializeObject<Job>(result);
+
+                    // if status is OK, update the database
+                    if (djob.JobStatus == "OK")
+                    {
+                        SqlConnection connection = null;
+                        SqlCommand command = null;
+
+                        try
+                        {
+                            connection = new SqlConnection(connectionString);
+                            connection.Open();
+
+                            command = new SqlCommand("Update Tasks Set TaskProcessed = 1 Where TaskId = @1", connection);
+                            command.CommandType = System.Data.CommandType.Text;
+                            command.Parameters.Clear();
+                            command.Parameters.Add("@1", System.Data.SqlDbType.Int);
+                            command.Parameters["@1"].Value = djob.JobId;
+                            command.ExecuteNonQuery();
+                        }
+                        catch (Exception ex) { }
+                        finally
+                        {
+                            // Cleanup command and connection objects.
+                            command.Dispose();
+                            connection.Close();
+                            connection.Dispose();
+                        }
+                    }
+
+                    Console.WriteLine(result);
+                }
+            }
+            catch (Exception ex)
+            {
             }
             finally
             {
