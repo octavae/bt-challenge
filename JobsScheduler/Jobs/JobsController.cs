@@ -55,7 +55,7 @@ namespace JobsScheduler.Jobs
                 connection = new SqlConnection(connectionString);
                 connection.Open();
 
-                command = new SqlCommand("Select TaskId, TaskName, TaskType from Tasks where TaskProcessed = 0", connection);
+                command = new SqlCommand("Select Top 1000 TaskId, TaskName, TaskType from Tasks where TaskProcessed = 0", connection);
                 command.CommandType = System.Data.CommandType.Text;
 
                 SqlDataReader dr = command.ExecuteReader();
