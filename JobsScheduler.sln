@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobsScheduler", "JobsSchedu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobsWebAPI", "JobsWebAPI\JobsWebAPI.csproj", "{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobsWebAPIAuth", "JobsWebAPIAuth\JobsWebAPIAuth.csproj", "{1661E84B-C5CF-47CA-959B-F8FDC086FC2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B4B1940-BA0A-45F3-BD7E-EEF61F7D376B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1661E84B-C5CF-47CA-959B-F8FDC086FC2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1661E84B-C5CF-47CA-959B-F8FDC086FC2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1661E84B-C5CF-47CA-959B-F8FDC086FC2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1661E84B-C5CF-47CA-959B-F8FDC086FC2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
