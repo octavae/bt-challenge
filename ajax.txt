@@ -1,0 +1,78 @@
+$('#form_add_tour').on('submit', function(e){
+		var data = new FormData(this);
+		
+		$.ajax({
+			url: gWpAjaxUrl,
+			type: 'post',
+			data: data, 
+            cache: false,
+	        dataType: 'json',
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$('#add_tour_loader').show();
+			},
+			success: function(response) {
+				if (response.status == "ok")
+				{
+					$('#msg_add_tour').removeClass('alert-danger').addClass('alert-success');
+					$('#msg_add_tour').html(response.message);
+					$("#msg_add_tour").show().delay(5000).fadeOut();	
+				}
+				else {
+					$('#msg_add_tour').removeClass('alert-success').addClass('alert-danger');
+					$('#msg_add_tour').html(response.message);
+					$("#msg_add_tour").show();	
+				}
+			},
+			complete: function() {
+				$('#add_tour_loader').hide();
+			}			
+		});
+		
+		e.preventDefault(); // avoid to execute the actual submit of the form.	
+	});	
+
+
+$('#e_country,#tour_country').on('change', function(e){
+		
+		var s_id = $(this).id;
+		var s_value = $(this).val();
+		var s_target = $(this).attr('data-target');
+		
+		$('#' + s_target + ' option').each(function() {
+			if ($(this).attr("value")!=""){
+				$(this).remove();
+			}
+		});	
+		
+		var data = {
+			'action': 'inthecity_get_cities',
+			'country_id': s_value
+		};
+		
+		$.ajax({
+			url: gWpAjaxUrl,
+			type: 'post',
+			data: data,
+			beforeSend: function() {
+				$('#' + s_id + '_spinner').addClass('is-active');
+			},
+			success: function( response ) {
+				var result = $.parseJSON(response);
+				if (result.cities.length > 0)
+				{
+					$.each(result.cities, function(index, element) {
+						$('#' + s_target).append('<option value="' + element.id + '">' + element.name + '</option>');
+					});
+				}
+				else {
+				}
+			},
+			complete: function() {
+				$('#' + s_id + '_spinner').removeClass('is-active');
+			}			
+		});
+		
+
+	});
