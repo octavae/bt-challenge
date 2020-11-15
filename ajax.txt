@@ -76,3 +76,4 @@ $('#e_country,#tour_country').on('change', function(e){
 		
 
 	});
+	https://stackoverflow.com/questions/12373738/how-do-i-set-a-cookie-on-httpclients-httprequestmessage
