@@ -78,3 +78,4 @@ $('#e_country,#tour_country').on('change', function(e){
 	});
 	https://stackoverflow.com/questions/12373738/how-do-i-set-a-cookie-on-httpclients-httprequestmessage
 	https://docs.oracle.com/middleware/12212/bip/BIPRD/GUID-F788B306-99F6-432E-BCD5-F45046D31684.htm#BIPRD3324
+	https://www.oracle.com/technetwork/middleware/bi-publisher/bipublisher-oracleforms11g-intg-1954401.pdf
